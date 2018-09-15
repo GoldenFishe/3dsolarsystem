@@ -6,7 +6,7 @@ module.exports = {
     entry: './src/js/index.js',
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '/',
+        publicPath: '/3dsolarsystem/',
         filename: 'bundle.js'
     },
     module: {
