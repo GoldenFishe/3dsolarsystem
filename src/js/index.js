@@ -1,3 +1,6 @@
+import * as THREE from 'three';
+import css from '../css/style.css';
+
 import SpaceObject from './spaceObject';
 import SolarSystem from './solarSystem';
 
@@ -5,24 +8,22 @@ import sunTexture from '../assets/sun.jpg';
 import mercuryTexture from '../assets/mercury.jpg';
 import venusTexture from '../assets/venus.jpg';
 import earthTexture from '../assets/earth.jpg';
-import moonTexture from '../assets/moon.png';
-import marsTexture from '../assets/mars.png';
-
-import css from '../css/style.css';
+import moonTexture from '../assets/moon.jpg';
+import marsTexture from '../assets/mars.jpg';
 
 const solarSystem = new SolarSystem();
-const sun = new SpaceObject(500, '#F97005', sunTexture);
-const mercury = new SpaceObject(100, '#F97005', mercuryTexture);
-const venus = new SpaceObject(100, '#F97005', venusTexture);
-const earth = new SpaceObject(100, '#5cdff9', earthTexture);
-const moon = new SpaceObject(10, '#cfcfd1', moonTexture);
-const mars = new SpaceObject(100, '#cfcfd1', marsTexture);
+const sun = new SpaceObject(500, '#F97005', sunTexture, 0);
+const mercury = new SpaceObject(100, '#F97005', mercuryTexture, 1000);
+const venus = new SpaceObject(100, '#F97005', venusTexture, 2000);
+const earth = new SpaceObject(100, '#5cdff9', earthTexture, 3000);
+const moon = new SpaceObject(10, '#cfcfd1', moonTexture, 3200);
+const mars = new SpaceObject(100, '#cfcfd1', marsTexture, 4000);
 
-mercury.position.x = 1000;
-venus.position.x = 2000;
-earth.position.x = 3000;
-moon.position.x = 3200;
-mars.position.x = 4000;
+let light1 = new THREE.PointLight('#ffffff');
+solarSystem.add(light1);
+
+let light = new THREE.HemisphereLight();
+solarSystem.add(light);
 
 solarSystem.add(sun);
 solarSystem.add(mercury);
