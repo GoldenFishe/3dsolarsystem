@@ -13,11 +13,19 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: ['style-loader', 'css-loader']
+                use: [
+                    {loader: 'style-loader'},
+                    {loader: 'css-loader'}]
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
-                use: ['file-loader']
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'assets/'
+                    }
+                }]
             }]
     },
     plugins: [

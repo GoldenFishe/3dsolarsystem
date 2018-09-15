@@ -5,6 +5,7 @@ export default class SpaceObject extends THREE.Mesh {
         super();
         this.geometry = new THREE.SphereGeometry(radius, 50, 50);
         this.material = new THREE.MeshLambertMaterial({color: color});
+        this.raduis = radius;
         this.angle = 0;
         this.loadTexture(texture);
     }
