@@ -5,7 +5,7 @@ import OrbitControls from 'three-orbitcontrols';
 export default class SolarSystem {
     constructor() {
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 200000);
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 220000);
         this.renderer = new THREE.WebGLRenderer({antialias: true});
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
 
@@ -17,7 +17,7 @@ export default class SolarSystem {
     }
 
     createSpace() {
-        let spaceGeometry = new THREE.SphereBufferGeometry(100000, 50, 50);
+        let spaceGeometry = new THREE.SphereBufferGeometry(110000, 50, 50);
         spaceGeometry.scale(-1, 1, 1);
         let spaceMaterial = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load(spaceTexture)});
         let space = new THREE.Mesh(spaceGeometry, spaceMaterial);
@@ -37,7 +37,7 @@ export default class SolarSystem {
 
     setUpCamera() {
         //this.camera.lookAt(this.scene.position);
-        this.camera.position.x = 31000;
+        this.camera.position.x = 41000;
         this.camera.position.y = 100;
     }
 
