@@ -5,15 +5,9 @@ import OrbitControls from 'three-orbitcontrols';
 export default class SolarSystem {
     constructor() {
         this.scene = new THREE.Scene();
-        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 100, 40000);
+        this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 200000);
         this.renderer = new THREE.WebGLRenderer({antialias: true});
         this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-
-        let spaceGeometry = new THREE.SphereBufferGeometry(20000, 50, 50);
-        spaceGeometry.scale(- 1, 1, 1 );
-        let spaceMaterial = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load(spaceTexture)});
-        let space = new THREE.Mesh(spaceGeometry, spaceMaterial);
-        this.scene.add(space);
 
         this.init();
     }
@@ -22,13 +16,36 @@ export default class SolarSystem {
         this.scene.add(object);
     }
 
-    init() {
+    createSpace() {
+        let spaceGeometry = new THREE.SphereBufferGeometry(100000, 50, 50);
+        spaceGeometry.scale(-1, 1, 1);
+        let spaceMaterial = new THREE.MeshBasicMaterial({map: new THREE.TextureLoader().load(spaceTexture)});
+        let space = new THREE.Mesh(spaceGeometry, spaceMaterial);
+        this.add(space);
+    }
+
+    createLite() {
+        this.add(new THREE.PointLight('#ffffff'));
+        this.add(new THREE.HemisphereLight('#ffffff', '#000000'));
+    }
+
+    setUpRenderer() {
         this.renderer.setSize(window.innerWidth, window.innerHeight);
         this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setClearColor(0x000000, 1);
+        this.renderer.setClearColor(0xffffff);
+    }
 
-        this.camera.lookAt(this.scene.position);
-        this.camera.position.z = 4200;
+    setUpCamera() {
+        //this.camera.lookAt(this.scene.position);
+        this.camera.position.x = 31000;
+        this.camera.position.y = 100;
+    }
+
+    init() {
+        this.createLite();
+        this.createSpace();
+        this.setUpRenderer();
+        this.setUpCamera();
 
         document.body.appendChild(this.renderer.domElement);
 
